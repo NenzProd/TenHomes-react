@@ -83,15 +83,15 @@ const Home = () => {
   ];
 
   const extrasItems = [
-    { icon: faCouch, title: 'Cozy Lounge', desc: 'Relax in a comfortable common area with sofas and a TV.', img: '' },
-    { icon: faUtensils, title: 'Dining Table', desc: 'Spacious dining area for meals and socializing.', img: '' },
-    { icon: faBook, title: 'Study Desk', desc: 'Dedicated study desk in every room for focused work.', img: '' },
-    { icon: faWifi, title: 'High-speed Wi-Fi', desc: 'Fast, reliable internet for work and entertainment.', img: '' },
-    { icon: faBath, title: 'Modern Bathroom', desc: 'Clean, modern bathrooms with hot water and ventilation.', img: '' },
-    { icon: faBath, title: 'Washing Machine', desc: 'On-site washing machine for convenient laundry.', img: '' },
-    { icon: faBlender, title: 'Kitchen & Gas', desc: 'Fully equipped kitchen with gas stove and utensils.', img: '' },
-    { icon: faSnowflake, title: 'Refrigerator', desc: 'Large fridge to keep your food and drinks fresh.', img: '' },
-    { icon: faBroom, title: 'Vacuum Cleaner', desc: 'Vacuum cleaner for easy room cleaning.', img: '' },
+    { icon: faCouch, title: 'Cozy Lounge', desc: 'Relax in a comfortable common area with sofas and a TV.', img: 'https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+    { icon: faUtensils, title: 'Dining Table', desc: 'Spacious dining area for meals and socializing.', img: 'https://images.unsplash.com/photo-1657524398377-567034729507?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGRpbmluZyUyMHRhYmxlfGVufDB8fDB8fHww' },
+    { icon: faBook, title: 'Study Desk', desc: 'Dedicated study desk in every room for focused work.', img: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+    { icon: faWifi, title: 'High-speed Wi-Fi', desc: 'Fast, reliable internet for work and entertainment.', img: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+    { icon: faBath, title: 'Modern Bathroom', desc: 'Clean, modern bathrooms with hot water and ventilation.', img: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+    { icon: faBath, title: 'Washing Machine', desc: 'On-site washing machine for convenient laundry.', img: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+    { icon: faBlender, title: 'Kitchen & Gas', desc: 'Fully equipped kitchen with gas stove and utensils.', img: 'https://images.unsplash.com/photo-1590534247854-e97d5e3feef6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+    { icon: faSnowflake, title: 'Refrigerator', desc: 'Large fridge to keep your food and drinks fresh.', img: 'https://images.unsplash.com/photo-1536353284924-9220c464e262?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZnJpZGdlfGVufDB8fDB8fHww' },
+    { icon: faBroom, title: 'Vacuum Cleaner', desc: 'Vacuum cleaner for easy room cleaning.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1e8Pzj4tBWDz_KhXOBQPmYlY7ei6LHYVOHw&s' },
   ];
 
   const carouselRef = useRef(null);
@@ -463,10 +463,40 @@ const Home = () => {
                 </div>
                 <div className="extras-card-title">{item.title}</div>
                 <div className="extras-card-desc">{item.desc}</div>
-                {/* Placeholder for image, replace src when you provide links */}
-                <div className="extras-card-img-placeholder">Image</div>
+                <img className="extras-card-img" src={item.img} alt={item.title} />
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+      {/* 
+        =================================================
+        TESTIMONIALS SECTION
+        =================================================
+      */}
+      <section className="testimonials-section">
+        <div className="testimonials-container">
+          <h2 className="testimonials-title">What Our Clients Say</h2>
+          <div className="testimonials-underline"></div>
+          <div className="testimonials-grid">
+            <div className="testimonial-card">
+              <div className="testimonial-stars">★★★★★</div>
+              <div className="testimonial-text">“TenHomes made renting my house so easy. I get my rent on time and my property is well taken care of!”</div>
+              <div className="testimonial-client">— Priya Sharma</div>
+              <div className="testimonial-location">Chennai, Owner</div>
+            </div>
+            <div className="testimonial-card">
+              <div className="testimonial-stars">★★★★★</div>
+              <div className="testimonial-text">“The PG is super clean, safe, and feels like home. The team is always responsive!”</div>
+              <div className="testimonial-client">— Rahul Verma</div>
+              <div className="testimonial-location">Chennai, Tenant</div>
+            </div>
+            <div className="testimonial-card">
+              <div className="testimonial-stars">★★★★★</div>
+              <div className="testimonial-text">“I never thought PG management could be this hassle-free. Highly recommend TenHomes!”</div>
+              <div className="testimonial-client">— Mrs. Lakshmi</div>
+              <div className="testimonial-location">Chennai, Owner</div>
+            </div>
           </div>
         </div>
       </section>

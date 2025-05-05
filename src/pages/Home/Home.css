@@ -319,6 +319,100 @@
 
 /* 
 * ==============================================
+* TESTIMONIALS SECTION
+* ==============================================
+*/
+.testimonials-section {
+  background: #fff6f0 url('https://www.transparenttextures.com/patterns/diamond-upholstery.png');
+  padding: 70px 0 70px 0;
+}
+.testimonials-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.testimonials-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  text-align: center;
+  color: #e75e4e;
+  font-family: "Segoe UI", Arial, sans-serif;
+  margin-bottom: 8px;
+}
+.testimonials-underline {
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #e75e4e 60%, #fbe2d2 100%);
+  border-radius: 2px;
+  margin: 0 auto 38px auto;
+}
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.testimonial-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.07);
+  padding: 38px 24px 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 260px;
+  position: relative;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.testimonial-card:hover {
+  box-shadow: 0 8px 24px 0 rgba(0,0,0,0.13);
+  transform: translateY(-5px) scale(1.03);
+}
+.testimonial-stars {
+  color: #ffc107;
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+.testimonial-text {
+  font-size: 1.08rem;
+  color: #444;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+.testimonial-client {
+  font-weight: 700;
+  color: #c75c4a;
+  font-size: 1.05rem;
+  margin-bottom: 2px;
+}
+.testimonial-location {
+  color: #888;
+  font-size: 0.97rem;
+}
+@media (max-width: 1000px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+}
+@media (max-width: 700px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .testimonial-card {
+    min-height: 180px;
+    padding: 22px 10px 16px 10px;
+  }
+  .testimonials-section {
+    padding: 40px 0 40px 0;
+  }
+}
+
+/* 
+* ==============================================
 * OWNER BENEFITS SECTION STYLES
 * ==============================================
 */
@@ -1305,6 +1399,23 @@
   font-size: 1rem;
   font-style: italic;
   margin-top: auto;
+}
+.extras-card-img {
+  width: 100%;
+  max-width: 220px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  display: block;
+}
+@media (max-width: 700px) {
+  .extras-card-img {
+    max-width: 100%;
+    height: 190px;
+    border-radius: 7px;
+  }
 }
 @media (max-width: 1000px) {
   .extras-grid {
