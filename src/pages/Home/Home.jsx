@@ -4,7 +4,7 @@ import houseOwnerImg from '../../assets/house owner.jpg';
 import cozyPGImg from '../../assets/cozyPG.webp';
 import ownerMeetingImg from '../../assets/TenHomes-Owner-meet.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoneyBillWave, faClock, faShieldAlt, faUserFriends, faHome, faRupeeSign, faFileContract, faKey, faGem, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faMoneyBillWave, faClock, faShieldAlt, faUserFriends, faHome, faRupeeSign, faFileContract, faKey, faGem, faChevronLeft, faChevronRight, faCouch, faUtensils, faWifi, faBath, faBook, faBlender, faSnowflake, faBroom } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * =====================================================
@@ -74,16 +74,67 @@ const Home = () => {
   ];
 
   const whatsInsideItems = [
-    { icon: '🛏️', title: 'Bed & Mattress', desc: 'Sleep-ready setup with quality foam mattress.' },
-    { icon: '🪞', title: 'Wardrobe', desc: 'Spacious storage for your belongings.' },
-    { icon: '🪟', title: 'Curtain', desc: 'Window curtains for privacy and comfort.' },
-    { icon: '💡', title: 'Ceiling Fan & Lights', desc: 'Bright, airy, and well-lit rooms.' },
-    { icon: '🪞', title: 'Mirror', desc: 'Full-length mirror for daily use.' },
-    { icon: '❄️', title: 'AC', desc: 'Air-conditioned comfort in select rooms.' }
+    { icon: '🛏️', title: 'Bed & Mattress', desc: 'Sleep-ready setup with quality foam mattress.', video: 'matress.mp4', longDesc: "High-quality mattress that provides excellent support for a good night's sleep. Our mattresses are made with premium foam materials for durability and comfort." },
+    { icon: '🪞', title: 'Wardrobe', desc: 'Spacious storage for your belongings.', video: 'cupboard.mp4', longDesc: "Spacious built-in wardrobes with multiple storage compartments. Each wardrobe has hanging space, shelves, and drawers to organize all your belongings." },
+    { icon: '🪟', title: 'Curtain', desc: 'Window curtains for privacy and comfort.', video: 'curtain.mp4', longDesc: "Premium blackout curtains provide privacy and light control. The elegant curtains complement the room's decor and help regulate room temperature." },
+    { icon: '💡', title: 'Ceiling Fan & Lights', desc: 'Bright, airy, and well-lit rooms.', video: 'fan light.mp4', longDesc: "High-quality ceiling fans with integrated lighting fixtures. The fans provide excellent air circulation and can be used alongside AC or as an energy-saving alternative." },
+    { icon: '🪞', title: 'Mirror', desc: 'Full-length mirror for daily use.', video: 'mirror.mp4', longDesc: "Full-length mirrors to help you get ready with confidence. The mirrors are strategically placed to maximize light and create a sense of space." },
+    { icon: '❄️', title: 'AC', desc: 'Air-conditioned comfort in select rooms.', video: 'ac.mp4', longDesc: "Modern air conditioning unit provides comfortable temperature control all year round. Our AC units are energy efficient and come with remote controls for easy temperature adjustment." }
+  ];
+
+  const extrasItems = [
+    { icon: faCouch, title: 'Cozy Lounge', desc: 'Relax in a comfortable common area with sofas and a TV.', img: '' },
+    { icon: faUtensils, title: 'Dining Table', desc: 'Spacious dining area for meals and socializing.', img: '' },
+    { icon: faBook, title: 'Study Desk', desc: 'Dedicated study desk in every room for focused work.', img: '' },
+    { icon: faWifi, title: 'High-speed Wi-Fi', desc: 'Fast, reliable internet for work and entertainment.', img: '' },
+    { icon: faBath, title: 'Modern Bathroom', desc: 'Clean, modern bathrooms with hot water and ventilation.', img: '' },
+    { icon: faBath, title: 'Washing Machine', desc: 'On-site washing machine for convenient laundry.', img: '' },
+    { icon: faBlender, title: 'Kitchen & Gas', desc: 'Fully equipped kitchen with gas stove and utensils.', img: '' },
+    { icon: faSnowflake, title: 'Refrigerator', desc: 'Large fridge to keep your food and drinks fresh.', img: '' },
+    { icon: faBroom, title: 'Vacuum Cleaner', desc: 'Vacuum cleaner for easy room cleaning.', img: '' },
   ];
 
   const carouselRef = useRef(null);
-  const [expandedIdx, setExpandedIdx] = useState(null);
+  const [selectedIdx, setSelectedIdx] = useState(0);
+  // Drag-to-scroll state
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  // Drag handlers
+  const handleMouseDown = (e) => {
+    isDragging.current = true;
+    startX.current = e.pageX - carouselRef.current.offsetLeft;
+    scrollLeft.current = carouselRef.current.scrollLeft;
+  };
+  const handleMouseLeave = () => {
+    isDragging.current = false;
+  };
+  const handleMouseUp = () => {
+    isDragging.current = false;
+  };
+  const handleMouseMove = (e) => {
+    if (!isDragging.current) return;
+    e.preventDefault();
+    const x = e.pageX - carouselRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.2; // scroll-fast
+    carouselRef.current.scrollLeft = scrollLeft.current - walk;
+  };
+  // Touch events for mobile
+  const handleTouchStart = (e) => {
+    isDragging.current = true;
+    startX.current = e.touches[0].pageX - carouselRef.current.offsetLeft;
+    scrollLeft.current = carouselRef.current.scrollLeft;
+  };
+  const handleTouchEnd = () => {
+    isDragging.current = false;
+  };
+  const handleTouchMove = (e) => {
+    if (!isDragging.current) return;
+    const x = e.touches[0].pageX - carouselRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.2;
+    carouselRef.current.scrollLeft = scrollLeft.current - walk;
+  };
 
   return (
     <div className="home-page">
@@ -329,64 +380,98 @@ const Home = () => {
       <section className="whats-inside-room-section">
         <div className="whats-inside-room-container">
           <h2 className="whats-inside-room-title">What's Inside Your Room?</h2>
+          <p className="whats-inside-room-subtitle">High-quality amenities and furnishings for your comfort</p>
           <div className="whats-inside-room-carousel-wrapper">
             <button className="carousel-arrow left" onClick={() => {
               const el = carouselRef.current;
-              el.scrollBy({ left: -el.offsetWidth / 1.2, behavior: 'smooth' });
+              el.scrollBy({ left: -el.offsetWidth / 1.5, behavior: 'smooth' });
             }}>
               <FontAwesomeIcon icon={faChevronLeft} />
             </button>
-            <div className="whats-inside-room-carousel" ref={carouselRef}>
+            <div
+              className="whats-inside-room-carousel"
+              ref={carouselRef}
+              onMouseDown={handleMouseDown}
+              onMouseLeave={handleMouseLeave}
+              onMouseUp={handleMouseUp}
+              onMouseMove={handleMouseMove}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              onTouchMove={handleTouchMove}
+              style={{ cursor: isDragging.current ? 'grabbing' : 'grab' }}
+            >
               {whatsInsideItems.map((item, idx) => (
-                <div key={idx} style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                  <div
-                    className={`whats-inside-room-card${expandedIdx === idx ? ' active' : ''}`}
-                    onClick={() => setExpandedIdx(expandedIdx === idx ? null : idx)}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    <div className="whats-inside-room-icon">{item.icon}</div>
-                    <div className="whats-inside-room-item-title">{item.title}</div>
-                    <div className="whats-inside-room-item-desc">{item.desc}</div>
-                  </div>
-                  {expandedIdx === idx && (
-                    <div className="whats-inside-room-expand-row">
-                      <input type="range" min="0" max="100" defaultValue="50" className="expand-slider" />
-                      <div className="expand-row-cards">
-                        <div className="expand-card video-card">
-                          {item.title === 'Bed & Mattress' ? (
-                            <video width="100%" height="180" controls autoPlay muted poster="https://via.placeholder.com/320x180?text=Matress">
-                              <source src="/src/assets/Videos/matress.mp4" type="video/mp4" />
-                              Your browser does not support the video tag.
-                            </video>
-                          ) : (
-                            <video width="100%" height="180" controls poster="https://via.placeholder.com/320x180?text=Video+Preview">
-                              <source src={`/src/assets/Videos/${item.title.toLowerCase().replace(/[&\s]+/g, '')}.mp4`} type="video/mp4" />
-                              Your browser does not support the video tag.
-                            </video>
-                          )}
-                        </div>
-                        <div className="expand-card text-card">
-                          <div className="expand-card-title">About {item.title}</div>
-                          <div className="expand-card-desc">This is a sample description for {item.title}. You can add more details about this amenity here.</div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                <div
+                  key={idx}
+                  className={`whats-inside-room-card${selectedIdx === idx ? ' selected' : ''}`}
+                  onClick={() => setSelectedIdx(idx)}
+                  style={{ border: selectedIdx === idx ? '2px solid #c75c4a' : undefined }}
+                >
+                  <div className="whats-inside-room-icon">{item.icon}</div>
+                  <div className="whats-inside-room-item-title">{item.title}</div>
+                  <div className="whats-inside-room-item-desc">{item.desc}</div>
                 </div>
               ))}
             </div>
             <button className="carousel-arrow right" onClick={() => {
               const el = carouselRef.current;
-              el.scrollBy({ left: el.offsetWidth / 1.2, behavior: 'smooth' });
+              el.scrollBy({ left: el.offsetWidth / 1.5, behavior: 'smooth' });
             }}>
               <FontAwesomeIcon icon={faChevronRight} />
             </button>
           </div>
+          <div className="whats-inside-videos">
+            <div className="whats-inside-video-row">
+              <div className="whats-inside-video-card big">
+                <video
+                  key={whatsInsideItems[selectedIdx].video}
+                  className="whats-inside-video big"
+                  controls
+                  autoPlay
+                  loop
+                  muted
+                  poster={null}
+                >
+                  <source src={`/src/assets/Videos/${whatsInsideItems[selectedIdx].video}`} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <div className="whats-inside-video-label">{whatsInsideItems[selectedIdx].title}</div>
+              </div>
+              <div className="whats-inside-video-desc-card big">
+                <div className="whats-inside-video-desc-text">
+                  {whatsInsideItems[selectedIdx].longDesc}
+                </div>
+              </div>
+            </div>
+          </div> 
         </div>
       </section>
-      
-    </div>
-  );
+      {/* 
+        =================================================
+        EXTRAS SECTION
+        =================================================
+      */}
+      <section className="extras-section">
+        <div className="extras-container">
+          <h2 className="extras-title">Extras That Make Life Easier</h2>
+          <p className="extras-subtitle">All the little things that make your stay truly comfortable and hassle-free.</p>
+          <div className="extras-grid">
+            {extrasItems.map((item, idx) => (
+              <div className="extras-card" key={idx}>
+                <div className="extras-icon">
+                  <FontAwesomeIcon icon={item.icon} />
+                </div>
+                <div className="extras-card-title">{item.title}</div>
+                <div className="extras-card-desc">{item.desc}</div>
+                {/* Placeholder for image, replace src when you provide links */}
+                <div className="extras-card-img-placeholder">Image</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div> // Closing home-page div
+  ); // Closing return statement
 };
 
 export default Home;
